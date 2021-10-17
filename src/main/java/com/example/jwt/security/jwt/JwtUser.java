@@ -1,5 +1,6 @@
 package com.example.jwt.security.jwt;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -39,38 +40,64 @@ public class JwtUser implements UserDetails {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
+    @JsonIgnore
+    public Long getId() {
+        return id;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    public String getFirstname() {
+        return firstName;
+    }
+
+    public String getLastname() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @JsonIgnore
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
+    }
+
+    @JsonIgnore
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 }
